@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 app.get("/trivia", async (req, res) => {
     try {
         // send all trivia
-        res.json(await trivia.find({}));
+        res.json(await Trivia.find({}));
     } catch (error) {
         //send error
         res.status(400).json(error);
@@ -70,7 +70,7 @@ app.get("/trivia", async (req, res) => {
 app.post("/trivia", async (req, res) => {
     try {
         // send all trivia
-        res.json(await trivia.create(req.body));
+        res.json(await Trivia.create(req.body));
     } catch (error) {
         //send error
         res.status(400).json(error);
