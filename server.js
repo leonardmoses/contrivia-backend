@@ -60,10 +60,29 @@ app.get("/trivia", async (req, res) => {
 
 
 // DESTROY (delete)
-
+// trivia DELETE ROUTE
+app.delete("/trivia/:id", async (req, res) => {
+    try {
+      // send all trivia
+      res.json(await Trivia.findByIdAndRemove(req.params.id));
+    } catch (error) {
+      //send error
+      res.status(400).json(error);
+    }
+  });
 
 // UPDATE (put)
-
+app.put("/trivia/:id", async (req, res) => {
+    try {
+      // send all trivia
+      res.json(
+        await Trivia.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      );
+    } catch (error) {
+      //send error
+      res.status(400).json(error);
+    }
+  });
 
 // CREATE (post)
 // trivia CREATE ROUTE
