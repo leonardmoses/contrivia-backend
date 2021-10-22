@@ -7,15 +7,15 @@ const mongoose = require('mongoose');
 // =======================================
 //               SCHEMA  
 // =======================================
-// const categorySchema = new mongoose.Schema({
-//     question: {type: String , required: false},
-//     answer: {type: String , required: false},
-//     difficulty: {type: Number, required: false},
-//   });
+const categorySchema = new mongoose.Schema({
+    question: {type: String , required: false},
+    answer: {type: String , required: false},
+    difficulty: {type: Number, required: false},
+  });
 
 const triviaSchema = new mongoose.Schema({
     catName: String,
-    // catInfo: categorySchema,
+    catInfo: categorySchema,
   });
 
 // =======================================
