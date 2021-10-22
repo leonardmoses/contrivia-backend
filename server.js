@@ -12,6 +12,9 @@ const express = require("express");
 const app = express();
 // import mongoose
 const mongoose = require("mongoose");
+// import middlware
+const cors = require("cors");
+const morgan = require("morgan");
 // =======================================
 //              DATABASE
 // =======================================
@@ -32,9 +35,9 @@ const Trivia = require('./models/trivia.js');
 // =======================================
 //              MIDDLEWARE
 // =======================================
-// import middlware
-const cors = require("cors");
-const morgan = require("morgan");
+app.use(cors()); // to prevent cors errors, open access to all origins
+app.use(morgan("dev")); // logging
+app.use(express.json()); // parse json bodies
 // =======================================
 //              ROUTES
 // =======================================
