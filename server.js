@@ -67,13 +67,6 @@ app.get("/trivia", async (req, res) => {
 app.delete("/trivia/:id", async (req, res) => {
     try {
       // send all trivia
-      let question = req.body.question
-      let answer = req.body.answer
-      //create data object to match how it looks in backend
-      let data = {
-        catName: req.body.catName,
-        catInfo: {question, answer}
-      }
       res.json(await Trivia.findByIdAndRemove(req.params.id));
     } catch (error) {
       //send error
@@ -85,6 +78,13 @@ app.delete("/trivia/:id", async (req, res) => {
 app.put("/trivia/:id", async (req, res) => {
     try {
       // send all trivia
+      let question = req.body.question
+      let answer = req.body.answer
+      //create data object to match how it looks in backend
+      let data = {
+        catName: req.body.catName,
+        catInfo: {question, answer}
+      }
       res.json(
         await Trivia.findByIdAndUpdate(req.params.id, req.body, { new: true })
       );
