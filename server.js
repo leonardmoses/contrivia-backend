@@ -65,7 +65,7 @@ app.get("/trivia", async (req, res) => {
 
 
 // DESTROY (delete)
-// trivia DELETE ROUTE
+//#region DELETE ROUTE - trivia (simple)
 app.delete("/trivia/:id", async (req, res) => {
     try {
       // send all trivia
@@ -75,8 +75,10 @@ app.delete("/trivia/:id", async (req, res) => {
       res.status(400).json(error);
     }
   });
+//#endregion
 
 // UPDATE (put)
+//#region PUT ROUTE trivia - (complex)
 app.put("/trivia/:id", async (req, res) => {
     try {
       // send all trivia
@@ -99,43 +101,45 @@ app.put("/trivia/:id", async (req, res) => {
       res.status(400).json(error);
     }
   });
-//#region 
+//#endregion
+
 // CREATE (post)
-// trivia CREATE ROUTE
+//#region PUT ROUTE trivia - (complex)
+app.post("/trivia", async (req, res) => {
+    try {
+        // send all trivia
+        res.json(await Trivia.create(req.body));
+    } catch (error) {
+        //send error
+        res.status(400).json(error);
+    }
+});
+//#endregion
+
+//#region trivia CREATE ROUTE that matches schema model
 // app.post("/trivia", async (req, res) => {
-//     try {
-//         // send all trivia
-//         res.json(await Trivia.create(req.body));
-//     } catch (error) {
-//         //send error
-//         res.status(400).json(error);
-//     }
+
+//   try {
+//       // send all trivia
+//       //create variables to reference in data. JS complains otherwise.
+//       let question = req.body.question
+//       let answer = req.body.answer
+//       let difficulty = req.body.difficulty
+//       //create data object to match how it looks in backend
+//       let data = {
+//         catName: req.body.catName,
+//         catInfo: {question, answer ,difficulty}
+//       }
+
+//       console.log(req.body)
+//       // console.log(req.body)
+//       res.json(await Trivia.create(data));
+//   } catch (error) {
+//       //send error
+//       res.status(400).json(error);
+//   }
 // });
 //#endregion
-// trivia CREATE ROUTE that matches schema model
-app.post("/trivia", async (req, res) => {
-
-  try {
-      // send all trivia
-      //create variables to reference in data. JS complains otherwise.
-      let question = req.body.question
-      let answer = req.body.answer
-      let difficulty = req.body.difficulty
-      //create data object to match how it looks in backend
-      let data = {
-        catName: req.body.catName,
-        catInfo: {question, answer ,difficulty}
-      }
-
-      console.log(req.body)
-      // console.log(req.body)
-      res.json(await Trivia.create(data));
-  } catch (error) {
-      //send error
-      res.status(400).json(error);
-  }
-});
-
 
 // EDIT (get) (put)
 

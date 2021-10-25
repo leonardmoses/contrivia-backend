@@ -7,28 +7,25 @@ const mongoose = require('mongoose');
 // =======================================
 //               SCHEMA  
 // =======================================
-// const triviaSchema = new mongoose.Schema(
-//   {
-//     catName: String,
-//     catInfo: 
-//                  {
-//                    question: String,
-//                    answer: String,
-//                  }
-               
-//   }
-// );
-
-const categorySchema = new mongoose.Schema({
-    question: {type: String , required: false},
-    answer: {type: String , required: false},
-    difficulty: {type: Number, required: false},
-  });
-
-const triviaSchema = new mongoose.Schema({
+const triviaSchema = new mongoose.Schema(
+  {
     catName: String,
-    catInfo: categorySchema,
-  });
+    question: String,
+    answer: String,
+    difficulty: Number
+  }
+);
+
+// const categorySchema = new mongoose.Schema({
+//     question: {type: String , required: false},
+//     answer: {type: String , required: false},
+//     difficulty: {type: Number, required: false},
+//   });
+
+// const triviaSchema = new mongoose.Schema({
+//     catName: String,
+//     catInfo: categorySchema
+//   });
 
 // =======================================
 //                 MODEL 
