@@ -13,6 +13,7 @@ const app = express();
 // import mongoose
 const mongoose = require("mongoose");
 // import middlware
+const methodOverride = require('method-override');
 const cors = require("cors");
 const morgan = require("morgan");
 // =======================================
@@ -35,6 +36,7 @@ const Trivia = require('./models/trivia.js');
 // =======================================
 //              MIDDLEWARE
 // =======================================
+app.use(methodOverride("_method"));
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
@@ -78,13 +80,17 @@ app.delete("/trivia/:id", async (req, res) => {
 app.put("/trivia/:id", async (req, res) => {
     try {
       // send all trivia
+      //create variables to reference in data. JS complains otherwise.
       let question = req.body.question
       let answer = req.body.answer
+      let difficulty = req.body.difficulty
       //create data object to match how it looks in backend
       let data = {
         catName: req.body.catName,
-        catInfo: {question, answer}
+        catInfo: {question, answer ,difficulty}
       }
+
+      console.log(req.body)
       res.json(
         await Trivia.findByIdAndUpdate(req.params.id, req.body, { new: true })
       );
@@ -93,7 +99,7 @@ app.put("/trivia/:id", async (req, res) => {
       res.status(400).json(error);
     }
   });
-
+//#region 
 // CREATE (post)
 // trivia CREATE ROUTE
 // app.post("/trivia", async (req, res) => {
@@ -105,7 +111,7 @@ app.put("/trivia/:id", async (req, res) => {
 //         res.status(400).json(error);
 //     }
 // });
-
+//#endregion
 // trivia CREATE ROUTE that matches schema model
 app.post("/trivia", async (req, res) => {
 
@@ -114,10 +120,11 @@ app.post("/trivia", async (req, res) => {
       //create variables to reference in data. JS complains otherwise.
       let question = req.body.question
       let answer = req.body.answer
+      let difficulty = req.body.difficulty
       //create data object to match how it looks in backend
       let data = {
         catName: req.body.catName,
-        catInfo: {question, answer}
+        catInfo: {question, answer ,difficulty}
       }
 
       console.log(req.body)
